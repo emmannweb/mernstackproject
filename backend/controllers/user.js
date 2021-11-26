@@ -61,9 +61,11 @@ exports.signin = async (req, res, next)=>{
             })
         }
 
+        const token = await user.jwtGenerateToken();
+
         res.status(200).json({
             sucess:true,
-            user
+            token
         })
     }
     catch(error){
