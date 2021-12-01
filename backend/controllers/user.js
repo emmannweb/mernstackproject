@@ -61,12 +61,7 @@ exports.signin = async (req, res, next)=>{
             })
         }
 
-        const token = await user.jwtGenerateToken();
-
-        res.status(200).json({
-            sucess:true,
-            token
-        })
+        generateToken(user, 200, res);
     }
     catch(error){
         console.log(error);
@@ -76,6 +71,22 @@ exports.signin = async (req, res, next)=>{
         })
     }
    
+}
+
+
+const generateToken = async (user, statusCode, res) =>{
+
+    const token = await user.jwtGenerateToken();
+
+    const options = {
+        httpOnly: true,
+        expires: new Date(Date.now() + process.env.EXPIRE_TOKEN)
+    };
+
+    res
+    .status(statusCode)
+    .cookie('token', token, options )
+    .json({success: true, token})
 }
 
 
