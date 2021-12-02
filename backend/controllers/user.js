@@ -90,3 +90,14 @@ const generateToken = async (user, statusCode, res) =>{
 }
 
 
+//LOG OUT USER
+exports.logout = (req, res, next)=>{
+    res.clearCookie('token');
+    res.status(200).json({
+        success: true,
+        message: "Logged out"
+    })
+}
+
+
+
