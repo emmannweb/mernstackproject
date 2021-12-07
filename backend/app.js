@@ -5,6 +5,11 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const errorHandler = require('./middleware/error');
+
+
+
+
 
 
 //IMPORT ROUTES
@@ -28,6 +33,10 @@ app.use(cookieParser());
 
 // ROUTES MIDDLEWARE
 app.use("/api", userRoutes)
+
+
+//ERROR MIDDLEWARE
+ app.use(errorHandler);
 
 const port = process.env.PORT || 8000;
 

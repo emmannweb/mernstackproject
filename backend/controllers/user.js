@@ -101,3 +101,19 @@ exports.logout = (req, res, next)=>{
 
 
 
+
+exports.singleUser = async (req, res, next)=>{
+
+    try {
+        const user = await User.findById(req.params.id);
+        res.status(200).json({
+            sucess: true,
+            user
+        })
+        
+    } catch (error) {
+        next(error)
+        
+    }
+   
+}
