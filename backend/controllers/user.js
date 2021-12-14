@@ -7,10 +7,10 @@ exports.signup = async (req, res, next)=>{
     const {email} = req.body;
     const userExist = await User.findOne({email});
     
-    if (userExist){
+    // if (userExist){
       
-     return  next(new ErrorResponse('E-mail already exists', 400))
-    }
+    //  return  next(new ErrorResponse('E-mail already exists', 400))
+    // }
 
     try {
         const user = await User.create(req.body);
@@ -21,10 +21,7 @@ exports.signup = async (req, res, next)=>{
         
     } catch (error) {
         console.log(error);
-        res.status(400).json({
-            success: false,
-            message: error.message
-        })
+        next(error);
         
     }
    
@@ -103,7 +100,7 @@ exports.singleUser = async (req, res, next)=>{
         })
         
     } catch (error) {
-        next(new ErrorResponse(`User with id: ${req.params.id} is not found`, 404))
+        next(error)
         
     }
    
