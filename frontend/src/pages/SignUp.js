@@ -1,5 +1,13 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import { toast} from 'react-toastify';
+
+
+
+
+
+
+
 
 const SignUp = () => {
 
@@ -30,11 +38,15 @@ const SignUp = () => {
 
             if  (data.success === true){
                 setValues({name: '', email: '', password:''});
+                toast.success("Sign up successfully, please Login!");
+              
             }
             
 
         } catch(err){
             console.log(err.response.data.error);
+            toast.error(err.response.data.error);
+         
         }
     }
     
