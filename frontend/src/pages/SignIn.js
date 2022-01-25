@@ -32,7 +32,7 @@ const SignIn = () => {
             console.log(data);
 
             if  (data.success === true){
-                setValues({name: '', email: '', password:''});
+                setValues({ email: '', password:''});
                 toast.success("Log In successfully");
               
             }

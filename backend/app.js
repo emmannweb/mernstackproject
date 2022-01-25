@@ -15,7 +15,7 @@ const errorHandler = require('./middleware/error');
 
 
 //IMPORT ROUTES
-const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
 
 
 
@@ -36,7 +36,7 @@ app.use(cors());
 
 
 // ROUTES MIDDLEWARE
-app.use("/api", userRoutes)
+app.use("/api", authRoutes)
 
 
 //ERROR MIDDLEWARE
