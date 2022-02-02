@@ -6,7 +6,7 @@ import Footer from '../component/Footer'
 
 
 
-const SignIn = () => {
+const SignIn = ({history}) => {
 
     const [values, setValues] = useState({
         email: '',
@@ -34,6 +34,7 @@ const SignIn = () => {
             if  (data.success === true){
                 setValues({ email: '', password:''});
                 toast.success("Log In successfully");
+                history.push('/user/dashboard');
               
             }
             

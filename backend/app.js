@@ -9,14 +9,8 @@ const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
 
 
-
-
-
-
-
 //IMPORT ROUTES
 const authRoutes = require('./routes/auth');
-
 
 
 // CONNECT DATABASE
