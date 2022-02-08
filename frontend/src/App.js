@@ -7,6 +7,7 @@ import UserDashboard from './pages/user/UserDashboard'
 import {BrowserRouter, Route} from 'react-router-dom'
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateRoute from './component/PrivateRoute';
 
 
 
@@ -21,7 +22,7 @@ const App = () => {
           <Route exact path="/" component={Home}/>
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/signin" component={SignIn}/>
-          <Route exact path="/user/dashboard" component={UserDashboard}/>
+          <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
         
       </BrowserRouter>
     </>

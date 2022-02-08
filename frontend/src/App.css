@@ -58,3 +58,9 @@
  .form-outline input[type=password] {
      border-bottom: 1px solid #f4f4f4;
  }
+
+
+ /* dashboard styling */
+.dashboard_container {
+padding: 100px 30px;
+}

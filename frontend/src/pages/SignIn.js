@@ -13,7 +13,7 @@ const SignIn = ({history}) => {
         password:''
     });
 
-    const {name, email, password} = values;
+    const { email, password} = values;
 
     const handleChange = name => (e) =>{
         // console.log(e.target.value);
@@ -35,6 +35,9 @@ const SignIn = ({history}) => {
                 setValues({ email: '', password:''});
                 toast.success("Log In successfully");
                 history.push('/user/dashboard');
+                if (typeof window !== "undefined"){
+                    localStorage.setItem("token", JSON.stringify(data))
+                }
               
             }
             
