@@ -1,7 +1,27 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+import {toast} from 'react-toastify'
 
-const Header = () => {
+
+
+
+const Header = ({history}) => {
+  
+
+    const logOut = () =>{
+        axios.get('/api/logout')
+        .then(result =>{
+            toast.success('Log out successfully');
+            localStorage.removeItem('token');
+            history.push('/');
+        })
+        .catch(error =>{
+            console.log(error);
+        })
+
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -40,10 +60,13 @@ const Header = () => {
 
                             <li className="nav-item">
                                 <Link className="nav-link" to ="/signin" >Sign In </Link>
-                            </li>
+                           </li>
+
+                            <li className="nav-item">
+                                <Link className="nav-link" to ="" onClick={logOut} >Log out </Link>
+                           </li>
 
                     
-                        
                         </ul>
                     
                     </div>

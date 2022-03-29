@@ -52,7 +52,7 @@ const SignIn = ({history}) => {
     return (
         <div>
             <Header/>
-            <div className="container custom_className pt-5">
+            <div className="container custom_className ">
                 <h2 className="signup_title text-center">SIGN IN</h2>
                 <form className=" col-sm-6 offset-3 pt-5 signup_form">
                     
