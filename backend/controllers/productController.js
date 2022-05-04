@@ -20,3 +20,22 @@ exports.createProduct = async (req, res, next)=>{
     }
    
 }
+
+exports.displayProduct = async (req, res, next)=>{
+
+  
+
+    try {
+        const products = await Product.find().populate('category');
+        res.status(201).json({
+            success: true,
+            products
+        })
+        
+    } catch (error) {
+        console.log(error);
+        next(error);
+        
+    }
+   
+}
