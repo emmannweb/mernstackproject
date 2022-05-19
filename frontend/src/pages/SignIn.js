@@ -9,8 +9,8 @@ import Footer from '../component/Footer'
 const SignIn = ({history}) => {
 
     const [values, setValues] = useState({
-        email: '',
-        password:''
+        email: 'emmanuelnoc@gmail.com',
+        password:'Mann@123'
     });
 
     const { email, password} = values;
@@ -34,9 +34,11 @@ const SignIn = ({history}) => {
             if  (data.success === true){
                 setValues({ email: '', password:''});
                 toast.success("Log In successfully");
-                history.push('/user/dashboard');
+                localStorage.setItem("token", JSON.stringify(data))
                 if (typeof window !== "undefined"){
-                    localStorage.setItem("token", JSON.stringify(data))
+                    setTimeout(()=>{
+                        history.push('/user/dashboard');
+                    }, 2000);
                 }
               
             }

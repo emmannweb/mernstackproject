@@ -55,12 +55,19 @@
  
  .form-outline input[type=text],
  .form-outline input[type=email],
+ .form-outline input[type=select],
+ .form-outline textarea,
  .form-outline input[type=password] {
      border-bottom: 1px solid #f4f4f4;
  }
+ select#category,
+ textarea#form4Example2,
+ input#form4Example3 {
+  border-bottom: 1px solid #f4f4f4;
+}
 
  /* sign in  */
- .custom_className{
+ .custom_class{
    padding-top: 80px;
    padding-bottom: 100px;
  }
