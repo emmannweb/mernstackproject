@@ -39,13 +39,23 @@ exports.createProduct = async (req, res, next)=>{
 
 exports.displayProduct = async (req, res, next)=>{
 
-  
+  //enable pagination
+  const pageSize = 2;
+  const page = Number(req.query.pageNumber) ||  1;
+  const count = await Product.find({}).estimatedDocumentCount();
 
     try {
-        const products = await Product.find().populate('category');
+        const products = await Product.find().populate('category')
+        .skip(pageSize * (page - 1))
+        .limit(pageSize)
+
         res.status(201).json({
             success: true,
-            products
+            products,
+            page,
+            pages: Math.ceil(count / pageSize),
+            count
+
         })
         
     } catch (error) {
