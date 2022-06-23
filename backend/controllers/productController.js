@@ -65,3 +65,31 @@ exports.displayProduct = async (req, res, next)=>{
     }
    
 }
+
+// delete product and product image in cloudinary
+exports.deleteProduct = async (req, res, next)=>{
+  
+      try {
+          const product = await Product.findById(req.params.id);
+          //retrieve current image ID
+          const imgId = product.image.public_id;
+          await cloudinary.uploader.destroy(imgId);
+          const rmProduct = await Product.findByIdAndDelete(req.params.id);
+
+          res.status(201).json({
+              success: true,
+              message:" Product deleted",
+  
+          })
+          
+      } catch (error) {
+          console.log(error);
+          next(error);
+          
+      }
+     
+  }
+
+
+
+
