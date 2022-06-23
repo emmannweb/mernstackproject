@@ -23,3 +23,12 @@ exports.isAuthenticated = async (req, res, next) =>{
         return next (new ErrorResponse('You must log in to access this ressource', 401));
     }
 }
+
+// admin middleware
+exports.isAdmin = (req, res, next) =>{
+    if (req.user.role === 0){
+        return next (new ErrorResponse('Access denied, you must be an admin', 401));
+    }
+    next();
+
+}
