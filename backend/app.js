@@ -13,6 +13,8 @@ const errorHandler = require('./middleware/error');
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/product');
 const categoryRoutes = require('./routes/category');
+const bannerRoutes = require('./routes/banner');
+
 
 
 
@@ -40,6 +42,8 @@ app.use(cors());
 app.use("/api", authRoutes)
 app.use("/api", productRoutes)
 app.use("/api", categoryRoutes)
+app.use("/api", bannerRoutes)
+
 
 
 //ERROR MIDDLEWARE

@@ -10,7 +10,7 @@ const AdminCreateProduct = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [category, setCategory] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState([]);
 
     //categories from the backend
     const [categories, setCategories] = useState([]);
