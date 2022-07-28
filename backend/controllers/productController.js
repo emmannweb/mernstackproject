@@ -1,6 +1,8 @@
 const Product = require("../models/product");
+const Category = require("../models/category");
 const ErrorResponse = require('../utils/errorResponse');
 const cloudinary = require('../utils/cloudinary');
+
 
 
 exports.createProduct = async (req, res, next)=>{
@@ -39,13 +41,28 @@ exports.createProduct = async (req, res, next)=>{
 
 exports.displayProduct = async (req, res, next)=>{
 
-  //enable pagination
-  const pageSize = 2;
-  const page = Number(req.query.pageNumber) ||  1;
-  const count = await Product.find({}).estimatedDocumentCount();
+    //enable pagination
+    const pageSize = 10;
+    const page = Number(req.query.pageNumber) ||  1;
+    const count = await Product.find({}).estimatedDocumentCount();
 
+    //all categories ids
+    let ids = [];
+    const categ = await Category.find({}, {_id:1});
+    categ.forEach(cat =>{
+        ids.push(cat._id);
+    })
+
+    //filter
+    let cat = req.query.cat;
+    let query = cat !== '' ? cat : ids;
+
+
+    
+   
     try {
-        const products = await Product.find().populate('category')
+
+        const products = await Product.find({category: query}).populate('category', 'name')
         .skip(pageSize * (page - 1))
         .limit(pageSize)
 
@@ -55,7 +72,6 @@ exports.displayProduct = async (req, res, next)=>{
             page,
             pages: Math.ceil(count / pageSize),
             count
-
         })
         
     } catch (error) {
@@ -73,7 +89,10 @@ exports.deleteProduct = async (req, res, next)=>{
           const product = await Product.findById(req.params.id);
           //retrieve current image ID
           const imgId = product.image.public_id;
-          await cloudinary.uploader.destroy(imgId);
+          if (imgId){
+            await cloudinary.uploader.destroy(imgId);
+          }
+         
           const rmProduct = await Product.findByIdAndDelete(req.params.id);
 
           res.status(201).json({
@@ -89,6 +108,24 @@ exports.deleteProduct = async (req, res, next)=>{
       }
      
   }
+
+
+  // display category
+exports.productCategory = async (req, res, next)=>{
+  
+    try {
+        const cat = await Product.find().populate('category', 'name').distinct('category');
+        res.status(201).json({
+            success: true,
+            cat
+        })
+        
+    } catch (error) {
+        console.log(error);
+        next(error);  
+    }
+   
+}
 
 
 

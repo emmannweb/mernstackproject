@@ -77,3 +77,9 @@
 .dashboard_container {
 padding: 100px 30px;
 }
+
+/* product card */
+.card{
+  min-height: 493px!important;
+  margin-bottom: 20px;
+}

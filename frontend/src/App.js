@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './component/PrivateRoute';
 import AdminCreateProduct from './pages/admin/AdminCreateProduct';
 import AdminAddBanner from './pages/admin/AdminAddBanner';
+import AdminDashboard from './pages/admin/AdminDashboard';
 
 
 
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path="/signup" component={SignUp}/>
           <Route exact path="/signin" component={SignIn}/>
           <PrivateRoute exact path="/user/dashboard" component={UserDashboard}/>
+          <Route exact path="/admin/dashboard" component={AdminDashboard}/>
           <Route exact path="/admin/dashboard/product/create" component={AdminCreateProduct}/>
           <Route exact path="/admin/dashboard/banner/create" component={AdminAddBanner}/>
         
