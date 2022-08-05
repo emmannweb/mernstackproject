@@ -42,7 +42,7 @@ exports.createProduct = async (req, res, next)=>{
 exports.displayProduct = async (req, res, next)=>{
 
     //enable pagination
-    const pageSize = 10;
+    const pageSize = 3;
     const page = Number(req.query.pageNumber) ||  1;
     const count = await Product.find({}).estimatedDocumentCount();
 
@@ -57,8 +57,6 @@ exports.displayProduct = async (req, res, next)=>{
     let cat = req.query.cat;
     let query = cat !== '' ? cat : ids;
 
-
-    
    
     try {
 

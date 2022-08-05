@@ -4,6 +4,8 @@ import Footer from '../component/Footer'
 import axios from 'axios';
 import Banner from '../component/Banner';
 import Card from '../component/Card';
+import 'antd/dist/antd.css';
+import { Pagination } from 'antd';
 
 
 
@@ -12,12 +14,15 @@ const Home = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState('');
+    const [pageNumber, setPageNumber] = useState(1);
+    const [count, setCount] = useState(0);
 
     const fetchProduct = () =>{
-        axios.get(`/api/products/all?cat=${category}`)
+        axios.get(`/api/products/all?cat=${category}&pageNumber=${pageNumber}`)
         .then((prods)=>{
             //console.log("products", prods.data.products)
             setProducts(prods.data.products);
+            setCount(prods.data.count);
         })
         .catch(error =>{
             console.log(error)
@@ -38,7 +43,7 @@ const Home = () => {
 
     useEffect(()=>{
         fetchProduct();
-    }, [category])
+    }, [category, pageNumber])
 
     useEffect(()=>{
          fetchProductCategory();
@@ -86,6 +91,7 @@ const Home = () => {
                                 )) 
                             }
                      </div>
+                     <Pagination current ={pageNumber} total={count} onChange={(prev)=> setPageNumber(prev)} pageSize={3} />
                    </div>
                 </div>
                
